@@ -38,6 +38,10 @@ public class StorageService {
 
     }
 
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(products.get(id));
+    }
+
     public static Map<UUID, Product> productMap() {
         Map<UUID, Product> products = new HashMap<>();
             Product jacket = new DiscountedProduct(UUID.randomUUID(), "Куртка", 8700, 15);
