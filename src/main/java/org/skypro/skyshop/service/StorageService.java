@@ -47,6 +47,7 @@ public class StorageService {
         Product socks = new SimpleProduct(UUID.randomUUID(), "Носки", 200);
         Product sneakers = new SimpleProduct(UUID.randomUUID(), "Кросовки", 2000);
 
+
         products.put(jacket.getId(), jacket);
         products.put(shirt.getId(), shirt);
         products.put(cardigan.getId(), cardigan);
