@@ -1,4 +1,6 @@
 package org.skypro.skyshop.controller;
+import org.skypro.skyshop.model.ShopError.NoSuchProductException;
+import org.skypro.skyshop.model.ShopError.ShopError;
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.basket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
@@ -7,6 +9,8 @@ import org.skypro.skyshop.model.search.Searchable;
 import org.skypro.skyshop.service.BasketService;
 import org.skypro.skyshop.service.StorageService;
 import org.skypro.skyshop.service.SearchService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -24,6 +28,12 @@ public class ShopController {
         this.storageService = storageService;
         this.searchService = searchService;
         this.basketService = basketService;
+    }
+
+    @ExceptionHandler(NoSuchProductException.class)
+    public ResponseEntity<ShopError> noSuchProductException(NoSuchProductException e){
+        ShopError shopError = new ShopError(555, "Такого продукта несуществует");
+        return new ResponseEntity<ShopError>(shopError, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/products")
